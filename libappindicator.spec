@@ -6,7 +6,7 @@
 #
 Name     : libappindicator
 Version  : 12.10.0
-Release  : 1
+Release  : 2
 URL      : https://launchpad.net/libappindicator/12.10/12.10.0/+download/libappindicator-12.10.0.tar.gz
 Source0  : https://launchpad.net/libappindicator/12.10/12.10.0/+download/libappindicator-12.10.0.tar.gz
 Source99 : https://launchpad.net/libappindicator/12.10/12.10.0/+download/libappindicator-12.10.0.tar.gz.asc
@@ -95,7 +95,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1534966481
+export SOURCE_DATE_EPOCH=1534966630
 %reconfigure --disable-static --with-gtk=3 \
 --disable-gtk-doc-html \
 --disable-mono-test \
@@ -110,7 +110,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1534966481
+export SOURCE_DATE_EPOCH=1534966630
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/doc/libappindicator
 cp COPYING %{buildroot}/usr/share/doc/libappindicator/COPYING
