@@ -1,0 +1,4 @@
+--with-gtk=3
+--disable-gtk-doc-html
+--disable-mono-test
+--disable-static

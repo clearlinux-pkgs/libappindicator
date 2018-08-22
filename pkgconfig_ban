@@ -1,0 +1,9 @@
+# This file contains pkgconfig build requirements that get picked up
+# but are undesirable. One entry per line, no whitespace.
+gapi-2.0
+gtk-sharp-2.0
+nunit
+pygobject-2.0
+pygtk-2.0
+mono
+gtk+-2.0

@@ -1,0 +1,9 @@
+Configure miss: vapigen
+Configure miss: mono >= 1.0
+Configure miss: al
+Configure miss: gacutil
+Configure miss: gtk-sharp-2.0 >= 2.12
+Configure miss: gapi-2.0 >= 2.12.1
+Configure miss: gapi2-parser
+Configure miss: gapi2-codegen
+Configure miss: gapi2-fixup
