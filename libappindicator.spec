@@ -6,7 +6,7 @@
 #
 Name     : libappindicator
 Version  : 12.10.0
-Release  : 2
+Release  : 3
 URL      : https://launchpad.net/libappindicator/12.10/12.10.0/+download/libappindicator-12.10.0.tar.gz
 Source0  : https://launchpad.net/libappindicator/12.10/12.10.0/+download/libappindicator-12.10.0.tar.gz
 Source99 : https://launchpad.net/libappindicator/12.10/12.10.0/+download/libappindicator-12.10.0.tar.gz.asc
