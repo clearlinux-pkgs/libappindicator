@@ -6,16 +6,16 @@
 #
 Name     : libappindicator
 Version  : 12.10.0
-Release  : 3
+Release  : 4
 URL      : https://launchpad.net/libappindicator/12.10/12.10.0/+download/libappindicator-12.10.0.tar.gz
 Source0  : https://launchpad.net/libappindicator/12.10/12.10.0/+download/libappindicator-12.10.0.tar.gz
 Source99 : https://launchpad.net/libappindicator/12.10/12.10.0/+download/libappindicator-12.10.0.tar.gz.asc
 Summary  : Application indicators
 Group    : Development/Tools
 License  : LGPL-2.1 LGPL-3.0
-Requires: libappindicator-data
-Requires: libappindicator-lib
-Requires: libappindicator-license
+Requires: libappindicator-data = %{version}-%{release}
+Requires: libappindicator-lib = %{version}-%{release}
+Requires: libappindicator-license = %{version}-%{release}
 BuildRequires : automake
 BuildRequires : automake-dev
 BuildRequires : docbook-xml
@@ -35,6 +35,7 @@ BuildRequires : pkgconfig(gobject-introspection-1.0)
 BuildRequires : pkgconfig(gtk+-3.0)
 BuildRequires : pkgconfig(indicator3-0.4)
 BuildRequires : pkgconfig(pygobject-3.0)
+BuildRequires : vala
 Patch1: libappindicator-disable-python-bindings.patch
 
 %description
@@ -52,9 +53,11 @@ data components for the libappindicator package.
 %package dev
 Summary: dev components for the libappindicator package.
 Group: Development
-Requires: libappindicator-lib
-Requires: libappindicator-data
-Provides: libappindicator-devel
+Requires: libappindicator-lib = %{version}-%{release}
+Requires: libappindicator-data = %{version}-%{release}
+Provides: libappindicator-devel = %{version}-%{release}
+Requires: libappindicator = %{version}-%{release}
+Requires: libappindicator = %{version}-%{release}
 
 %description dev
 dev components for the libappindicator package.
@@ -71,8 +74,8 @@ doc components for the libappindicator package.
 %package lib
 Summary: lib components for the libappindicator package.
 Group: Libraries
-Requires: libappindicator-data
-Requires: libappindicator-license
+Requires: libappindicator-data = %{version}-%{release}
+Requires: libappindicator-license = %{version}-%{release}
 
 %description lib
 lib components for the libappindicator package.
@@ -94,8 +97,16 @@ license components for the libappindicator package.
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1534966630
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1563457052
+export GCC_IGNORE_WERROR=1
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %reconfigure --disable-static --with-gtk=3 \
 --disable-gtk-doc-html \
 --disable-mono-test \
@@ -103,18 +114,18 @@ export SOURCE_DATE_EPOCH=1534966630
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1534966630
+export SOURCE_DATE_EPOCH=1563457052
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/libappindicator
-cp COPYING %{buildroot}/usr/share/doc/libappindicator/COPYING
-cp COPYING.LGPL.2.1 %{buildroot}/usr/share/doc/libappindicator/COPYING.LGPL.2.1
+mkdir -p %{buildroot}/usr/share/package-licenses/libappindicator
+cp COPYING %{buildroot}/usr/share/package-licenses/libappindicator/COPYING
+cp COPYING.LGPL.2.1 %{buildroot}/usr/share/package-licenses/libappindicator/COPYING.LGPL.2.1
 %make_install
 
 %files
@@ -124,6 +135,8 @@ cp COPYING.LGPL.2.1 %{buildroot}/usr/share/doc/libappindicator/COPYING.LGPL.2.1
 %defattr(-,root,root,-)
 /usr/lib64/girepository-1.0/AppIndicator3-0.1.typelib
 /usr/share/gir-1.0/*.gir
+/usr/share/vala/vapi/appindicator3-0.1.deps
+/usr/share/vala/vapi/appindicator3-0.1.vapi
 
 %files dev
 %defattr(-,root,root,-)
@@ -156,6 +169,6 @@ cp COPYING.LGPL.2.1 %{buildroot}/usr/share/doc/libappindicator/COPYING.LGPL.2.1
 /usr/lib64/libappindicator3.so.1.0.0
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/libappindicator/COPYING
-/usr/share/doc/libappindicator/COPYING.LGPL.2.1
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/libappindicator/COPYING
+/usr/share/package-licenses/libappindicator/COPYING.LGPL.2.1

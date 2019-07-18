@@ -1,4 +1,3 @@
-Configure miss: vapigen
 Configure miss: mono >= 1.0
 Configure miss: al
 Configure miss: gacutil
