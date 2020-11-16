@@ -6,10 +6,10 @@
 #
 Name     : libappindicator
 Version  : 12.10.0
-Release  : 5
+Release  : 6
 URL      : https://launchpad.net/libappindicator/12.10/12.10.0/+download/libappindicator-12.10.0.tar.gz
 Source0  : https://launchpad.net/libappindicator/12.10/12.10.0/+download/libappindicator-12.10.0.tar.gz
-Source99 : https://launchpad.net/libappindicator/12.10/12.10.0/+download/libappindicator-12.10.0.tar.gz.asc
+Source1  : https://launchpad.net/libappindicator/12.10/12.10.0/+download/libappindicator-12.10.0.tar.gz.asc
 Summary  : Application indicators
 Group    : Development/Tools
 License  : LGPL-2.1 LGPL-3.0
@@ -57,7 +57,6 @@ Requires: libappindicator-lib = %{version}-%{release}
 Requires: libappindicator-data = %{version}-%{release}
 Provides: libappindicator-devel = %{version}-%{release}
 Requires: libappindicator = %{version}-%{release}
-Requires: libappindicator = %{version}-%{release}
 
 %description dev
 dev components for the libappindicator package.
@@ -91,6 +90,7 @@ license components for the libappindicator package.
 
 %prep
 %setup -q -n libappindicator-12.10.0
+cd %{_builddir}/libappindicator-12.10.0
 %patch1 -p1
 
 %build
@@ -98,14 +98,14 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1563457052
+export SOURCE_DATE_EPOCH=1605557568
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %reconfigure --disable-static --with-gtk=3 \
 --disable-gtk-doc-html \
@@ -118,14 +118,14 @@ export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-make VERBOSE=1 V=1 %{?_smp_mflags} check || :
+make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1563457052
+export SOURCE_DATE_EPOCH=1605557568
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libappindicator
-cp COPYING %{buildroot}/usr/share/package-licenses/libappindicator/COPYING
-cp COPYING.LGPL.2.1 %{buildroot}/usr/share/package-licenses/libappindicator/COPYING.LGPL.2.1
+cp %{_builddir}/libappindicator-12.10.0/COPYING %{buildroot}/usr/share/package-licenses/libappindicator/e7d563f52bf5295e6dba1d67ac23e9f6a160fab9
+cp %{_builddir}/libappindicator-12.10.0/COPYING.LGPL.2.1 %{buildroot}/usr/share/package-licenses/libappindicator/9a1929f4700d2407c70b507b3b2aaf6226a9543c
 %make_install
 
 %files
@@ -170,5 +170,5 @@ cp COPYING.LGPL.2.1 %{buildroot}/usr/share/package-licenses/libappindicator/COPY
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/libappindicator/COPYING
-/usr/share/package-licenses/libappindicator/COPYING.LGPL.2.1
+/usr/share/package-licenses/libappindicator/9a1929f4700d2407c70b507b3b2aaf6226a9543c
+/usr/share/package-licenses/libappindicator/e7d563f52bf5295e6dba1d67ac23e9f6a160fab9
